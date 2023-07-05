@@ -5,5 +5,5 @@ using UnityEngine.Serialization;
 
 public abstract class AppElement : MonoBehaviour
 {
-    public Application application;
+    [SerializeField] protected Application application;
 }

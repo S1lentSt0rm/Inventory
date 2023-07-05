@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class View : AppElement
 {
-    public GameObject InventoryCanvas;
+    public InventoryView InventoryView;
 }
