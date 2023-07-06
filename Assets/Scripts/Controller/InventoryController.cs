@@ -27,6 +27,7 @@ public class InventoryController : MonoBehaviour
             
             inventoryModel.dropItemList.Add(itemView.itemModel);
             Application.Instance.view.inventoryView.UpdateInventoryView();
+            Application.Instance.model.inventoryModel.SaveInventoryData();
             
             return;
         }
@@ -42,6 +43,7 @@ public class InventoryController : MonoBehaviour
                     inventoryModel.inventoryItemList.Add(new InventoryModel.PlacedItem(new Vector2Int(i,j),itemView.itemModel));
                     inventoryModel.Inventory[i, j] = InventorySlotStatus.Full;
                     Application.Instance.view.inventoryView.UpdateInventoryView();
+                    Application.Instance.model.inventoryModel.SaveInventoryData();
                     return;
                 }
             }

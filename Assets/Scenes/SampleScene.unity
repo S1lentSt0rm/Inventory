@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySize: {x: 10, y: 10}
+  dropItemList: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
