@@ -9,6 +9,7 @@ public class ItemModel
 {
     public ItemModelSO ItemModelSO;
     public float itemState;
+    public ItemView ItemView;
 
     public ItemModel(ItemModelSO itemModelSO)
     {
@@ -21,6 +22,6 @@ public class ItemModel
 public class ItemModelSO : ScriptableObject
 {
     public string itemName;
-    public Vector2 itemSize;
+    public Vector2Int itemSize;
     public GameObject prefab;
 }

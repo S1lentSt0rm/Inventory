@@ -10,8 +10,18 @@ public class InventoryTesting : MonoBehaviour
 
     private void Awake()
     {
-        InventoryModel.dropItemList.Add(new ItemModel(possibleItems[0]));
-        InventoryModel.dropItemList.Add(new ItemModel(possibleItems[1]));
-        InventoryModel.dropItemList.Add(new ItemModel(possibleItems[2]));
+        InventoryModel.AddItemToInventory(new ItemModel(possibleItems[0]));
+        InventoryModel.AddItemToInventory(new ItemModel(possibleItems[1]));
+        InventoryModel.AddItemToInventory(new ItemModel(possibleItems[2]));
+        
+        InventoryModel.AddItemToDrop(new ItemModel(possibleItems[0]));
+        InventoryModel.AddItemToDrop(new ItemModel(possibleItems[1]));
+        InventoryModel.AddItemToDrop(new ItemModel(possibleItems[2]));
+    }
+
+    private void Update()
+    {
+        Debug.Log("Inventory item count: "+InventoryModel.inventoryItemList.Count);
+        Debug.Log("Drop item count: "+InventoryModel.dropItemList.Count);
     }
 }

@@ -9,12 +9,26 @@ public class InventoryController : MonoBehaviour
     {
         // Application.Instance.view.inventoryView.Init();
         
-        Application.Instance.notification.inventoryNotification.DropItemOnClick.AddListener(TryMoveItemToInventory);
+        Application.Instance.notification.inventoryNotification.ItemOnClick.AddListener(TryToMoveItem);
     }
 
-    private static void TryMoveItemToInventory(ItemView item)
+    private static void TryToMoveItem(ItemView item)
     {
-        Debug.Log(item.name);
-        Destroy(item.gameObject);
+        if (item.isInInventory)
+        {
+            Application.Instance.model.inventoryModel.inventoryItemList.Remove(item.itemModel);
+            Application.Instance.model.inventoryModel.dropItemList.Add(item.itemModel);
+        }
+        else
+        {
+            Application.Instance.model.inventoryModel.dropItemList.Remove(item.itemModel);
+            Application.Instance.model.inventoryModel.inventoryItemList.Add(item.itemModel);
+        }
+
+        Application.Instance.view.inventoryView.UpdateInventoryView();
+        
+        //Application.Instance.model.inventoryModel.inventoryItemList.Add(new InventoryModel.AddItem(new Vector2Int(1,1)));
+        // Debug.Log(item.name);
+        // Destroy(item.gameObject);
     }
 }

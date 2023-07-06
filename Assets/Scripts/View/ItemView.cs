@@ -8,9 +8,12 @@ using UnityEngine.UI;
 public class ItemView : MonoBehaviour
 {
     [SerializeField] private GameObject itemVisual;
+    public ItemModel itemModel;
+
+    public bool isInInventory = false;//test
 
     public void ItemOnClick()
     {
-        Application.Instance.notification.inventoryNotification.DropItemOnClick.Invoke(this);
+        Application.Instance.notification.inventoryNotification.ItemOnClick.Invoke(this);
     }
 }
