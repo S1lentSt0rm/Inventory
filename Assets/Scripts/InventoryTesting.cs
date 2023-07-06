@@ -2,21 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class InventoryTesting : MonoBehaviour
 {
     public InventoryModel InventoryModel;
     public List<ItemModelSO> possibleItems;
 
+    public int dropItemCount;
+
     private void Awake()
     {
-        InventoryModel.AddItemToInventory(new ItemModel(possibleItems[0]));
-        InventoryModel.AddItemToInventory(new ItemModel(possibleItems[1]));
-        InventoryModel.AddItemToInventory(new ItemModel(possibleItems[2]));
-        
-        InventoryModel.AddItemToDrop(new ItemModel(possibleItems[0]));
-        InventoryModel.AddItemToDrop(new ItemModel(possibleItems[1]));
-        InventoryModel.AddItemToDrop(new ItemModel(possibleItems[2]));
+        for (int i = 0; i < dropItemCount; i++)
+        {
+            var index = Random.Range(0, possibleItems.Count);
+            InventoryModel.AddItemToDrop(new ItemModel(possibleItems[index]));
+        }
     }
 
     private void Update()
