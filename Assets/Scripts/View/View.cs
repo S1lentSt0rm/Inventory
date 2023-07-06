@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public abstract class AppElement : MonoBehaviour
+public class View : MonoBehaviour
 {
-    [SerializeField] protected Application application;
+    public InventoryView inventoryView;
 }

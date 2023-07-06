@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b52fb749b96e12e42ab1564f3307581b, type: 3}
+  m_Script: {fileID: 0}
   m_Name: Diamond
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemModelSO
   itemName: Diamond
+  itemState: 1
   itemIcon: {fileID: 21300000, guid: 4ee89796662433940b0df96c184db0db, type: 3}
   itemSize: {x: 2, y: 2}
+  prefab: {fileID: 8190466710053217278, guid: 3360797eab94d9b4cb9c250f2a39cd6f, type: 3}

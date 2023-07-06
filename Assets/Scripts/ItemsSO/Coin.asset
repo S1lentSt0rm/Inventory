@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b52fb749b96e12e42ab1564f3307581b, type: 3}
-  m_Name: New Item Model
-  m_EditorClassIdentifier: 
+  m_Script: {fileID: 0}
+  m_Name: Coin
+  m_EditorClassIdentifier: Assembly-CSharp::ItemModelSO
   itemName: Coin
+  itemState: 0
   itemIcon: {fileID: 21300000, guid: ad936cfa40f02b54c8183961cc166e30, type: 3}
   itemSize: {x: 1, y: 1}
+  prefab: {fileID: 8190466710053217278, guid: 1a97b51b59648b548b6c0d47556c24a1, type: 3}

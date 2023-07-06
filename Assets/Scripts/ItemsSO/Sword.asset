@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b52fb749b96e12e42ab1564f3307581b, type: 3}
+  m_Script: {fileID: 0}
   m_Name: Sword
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemModelSO
   itemName: Sword
+  itemState: 0
   itemIcon: {fileID: 21300000, guid: 17782afca937731469b3a1b91306c934, type: 3}
   itemSize: {x: 1, y: 3}
+  prefab: {fileID: 8190466710053217278, guid: bcc85fcbc370ef840ad41948285e8156, type: 3}
