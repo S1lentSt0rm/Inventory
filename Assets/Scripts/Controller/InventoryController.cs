@@ -1,15 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
     private void Start()
     {
-        // Application.Instance.view.inventoryView.Init();
-        
         Application.Instance.notification.inventoryNotification.ItemOnClick.AddListener(TryToMoveItem);
     }
 
@@ -19,43 +13,41 @@ public class InventoryController : MonoBehaviour
         
         if (itemView.isInInventory)
         {
-            InventoryModel.PlacedItem placedItem =
-                inventoryModel.inventoryItemList.Find(item => item.itemModel == itemView.itemModel);
-            inventoryModel.Inventory[placedItem.itemGridPosition.x, placedItem.itemGridPosition.y] =
+            var placedItem =
+                inventoryModel.InventoryItemList.Find(item => item.ItemModel == itemView.itemModel);
+            inventoryModel.Inventory[placedItem.ItemGridPosition.x, placedItem.ItemGridPosition.y] =
                 InventorySlotStatus.Empty;
-            inventoryModel.inventoryItemList.Remove(placedItem);
+            inventoryModel.InventoryItemList.Remove(placedItem);
             
             inventoryModel.dropItemList.Add(itemView.itemModel);
+            
             Application.Instance.view.inventoryView.UpdateInventoryView();
             Application.Instance.model.inventoryModel.SaveInventoryData();
             
             return;
         }
-        
-        
-        for (int i = 0; i < inventoryModel.inventorySize.x; i++)
+        else
         {
-            for (int j = 0; j < inventoryModel.inventorySize.y; j++)
+            for (int i = 0; i < inventoryModel.inventorySize.x; i++)
             {
-                if (inventoryModel.Inventory[i,j] == InventorySlotStatus.Empty)
+                for (int j = 0; j < inventoryModel.inventorySize.y; j++)
                 {
-                    inventoryModel.dropItemList.Remove(itemView.itemModel);
-                    inventoryModel.inventoryItemList.Add(new InventoryModel.PlacedItem(new Vector2Int(i,j),itemView.itemModel));
-                    inventoryModel.Inventory[i, j] = InventorySlotStatus.Full;
-                    Application.Instance.view.inventoryView.UpdateInventoryView();
-                    Application.Instance.model.inventoryModel.SaveInventoryData();
-                    return;
+                    if (inventoryModel.Inventory[i,j] == InventorySlotStatus.Empty)
+                    {
+                        inventoryModel.dropItemList.Remove(itemView.itemModel);
+                        inventoryModel.InventoryItemList.Add(
+                            new InventoryModel.PlacedItem(new Vector2Int(i,j),itemView.itemModel));
+                        inventoryModel.Inventory[i, j] = InventorySlotStatus.Full;
+                        
+                        Application.Instance.view.inventoryView.UpdateInventoryView();
+                        Application.Instance.model.inventoryModel.SaveInventoryData();
+                        
+                        return;
+                    }
                 }
             }
         }
- 
+        
         Debug.Log("Cannot place item");
-        
-
-        
-        
-        //Application.Instance.model.inventoryModel.inventoryItemList.Add(new InventoryModel.AddItem(new Vector2Int(1,1)));
-        // Debug.Log(item.name);
-        // Destroy(item.gameObject);
     }
 }

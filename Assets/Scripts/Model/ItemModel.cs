@@ -1,19 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [System.Serializable]
 public class ItemModel
 {
-    public ItemModelSO ItemModelSO;
+    public ItemModelSO itemModelSO;
     public float itemState;
-    public ItemView ItemView;
+    public ItemView itemView;
 
     public ItemModel(ItemModelSO itemModelSO)
     {
-        ItemModelSO = itemModelSO;
+        this.itemModelSO = itemModelSO;
     }
     
     public string Serialize()

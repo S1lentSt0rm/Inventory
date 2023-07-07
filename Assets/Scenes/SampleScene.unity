@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3347fceec5f5e2d41aa3d1575cced07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryModel: {fileID: 158301689}
+  inventoryModel: {fileID: 158301689}
   possibleItems:
   - {fileID: 11400000, guid: eab7836b1457288458ec6fcbf9ed79b0, type: 2}
   - {fileID: 11400000, guid: f7370d87d8acf9e418c02ba5eeef17a8, type: 2}

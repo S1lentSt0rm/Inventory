@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [Serializable]
 public class InventoryModel : MonoBehaviour
@@ -13,66 +11,55 @@ public class InventoryModel : MonoBehaviour
 
      public struct PlacedItem
      {
-         public Vector2Int itemGridPosition;
-         public ItemModel itemModel;
+         public Vector2Int ItemGridPosition;
+         public ItemModel ItemModel;
     
          public PlacedItem(Vector2Int position, ItemModel itemModel)
          {
-             itemGridPosition = position;
-             this.itemModel = itemModel;
+             ItemGridPosition = position;
+             this.ItemModel = itemModel;
          }
      }
-    public List<PlacedItem> inventoryItemList = new List<PlacedItem>();
-    
+    public List<PlacedItem> InventoryItemList = new List<PlacedItem>();
     public List<ItemModel> dropItemList = new List<ItemModel>();
 
-
-    public void AddItemToInventory(Vector2Int slot, ItemModel itemModel)
-    {
-        //inventoryItemList.Add(itemModel);
-
-        //Application.Instance.view.inventoryView.UpdateInventoryView();
-    }
-    
-    public void AddItemToDrop(ItemModel itemModel)
-    {
-        dropItemList.Add(itemModel);
-        //Application.Instance.view.inventoryView.UpdateInventoryView();
-    }
-    
     private void Awake()
     {
         LoadInventoryData();
         Inventory = new InventorySlotStatus[inventorySize.x, inventorySize.y];
-        foreach (var item in inventoryItemList)
+        foreach (var item in InventoryItemList)
         {
-            Inventory[item.itemGridPosition.x, item.itemGridPosition.y] = InventorySlotStatus.Full;
+            Inventory[item.ItemGridPosition.x, item.ItemGridPosition.y] = InventorySlotStatus.Full;
         }
     }
 
     public void SaveInventoryData()
     {
-        InventoryData inventoryData = new InventoryData();
-        inventoryData.inventorySize = inventorySize;
-
-        List<PlacedItemData> serializedInventoryItems = new List<PlacedItemData>();
-        foreach (var placedItem in inventoryItemList)
+        var inventoryData = new InventoryData
         {
-            PlacedItemData placedItemData = new PlacedItemData();
-            placedItemData.itemGridPosition = placedItem.itemGridPosition;
-            placedItemData.itemModelJson = placedItem.itemModel.Serialize();
+            inventorySize = inventorySize
+        };
+
+        var serializedInventoryItems = new List<PlacedItemData>();
+        foreach (var placedItem in InventoryItemList)
+        {
+            var placedItemData = new PlacedItemData
+            {
+                itemGridPosition = placedItem.ItemGridPosition,
+                itemModelJson = placedItem.ItemModel.Serialize()
+            };
             serializedInventoryItems.Add(placedItemData);
         }
         inventoryData.inventoryItemList = serializedInventoryItems.ToArray();
         
-        List<string> serializedDropItems = new List<string>();
+        var serializedDropItems = new List<string>();
         foreach (var dropItem in dropItemList)
         {
             serializedDropItems.Add(dropItem.Serialize());
         }
         inventoryData.dropItemList = new List<string>(serializedDropItems);
 
-        string json = JsonUtility.ToJson(inventoryData);
+        var json = JsonUtility.ToJson(inventoryData);
         File.WriteAllText("inventoryData.json", json);
     }
     
@@ -82,24 +69,26 @@ public class InventoryModel : MonoBehaviour
         {
             return;
         }
-        string json = File.ReadAllText("inventoryData.json");
-        InventoryData inventoryData = JsonUtility.FromJson<InventoryData>(json);
+        var json = File.ReadAllText("inventoryData.json");
+        var inventoryData = JsonUtility.FromJson<InventoryData>(json);
         
         inventorySize = inventoryData.inventorySize;
 
-        inventoryItemList.Clear();
+        InventoryItemList.Clear();
         foreach (var placedItemData in inventoryData.inventoryItemList)
         {
-            PlacedItem placedItem = new PlacedItem();
-            placedItem.itemGridPosition = placedItemData.itemGridPosition;
-            placedItem.itemModel = ItemModel.Deserialize(placedItemData.itemModelJson);
-            inventoryItemList.Add(placedItem);
+            var placedItem = new PlacedItem
+            {
+                ItemGridPosition = placedItemData.itemGridPosition,
+                ItemModel = ItemModel.Deserialize(placedItemData.itemModelJson)
+            };
+            InventoryItemList.Add(placedItem);
         }
         
         dropItemList.Clear();
         foreach (var serializedDropItem in inventoryData.dropItemList)
         {
-            ItemModel dropItem = ItemModel.Deserialize(serializedDropItem);
+            var dropItem = ItemModel.Deserialize(serializedDropItem);
             dropItemList.Add(dropItem);
         }
     }
